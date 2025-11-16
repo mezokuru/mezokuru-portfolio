@@ -16,32 +16,76 @@
 
 ## DALL-E Prompts
 
-### Option 1: Minimalist Wordmark
+### Option 1: MK with Spiral Transformation (PRIMARY CONCEPT)
 ```
-Create a minimalist wordmark logo for "MEZOKURU", a web development company. 
-Modern sans-serif typography, clean and technical aesthetic. 
-Color scheme: dark slate (#2c3e50) and gold accent (#ffd166). 
-The design should feel professional, growth-oriented, and developer-focused. 
-Simple, flat design with subtle geometric elements. 
-White background, vector style.
+Create a minimal logo with the letters "M" and "K" where the K transforms into a spiral that encircles the MK.
+
+Design details:
+- Letter M: bold, geometric, dark slate color (#2c3e50)
+- Letter K: starts as a normal K, but the diagonal lines curve and transform into a spiral
+- The spiral: golden color (#ffd166), flows from the K and wraps around both letters
+- The transformation should be smooth and organic - the K's diagonals naturally become spiral curves
+- Minimal, clean, geometric aesthetic
+- Flat design, no gradients, no shadows
+- Vector style, white background
+- Professional, modern, growth-oriented
+
+The concept: MK (Mezokuru) with the K's energy spiraling outward, representing growth and awakening.
 ```
 
-### Option 2: Geometric Symbol + Wordmark
+### Option 1B: MK Spiral (Simplified)
 ```
-Design a logo combining a geometric symbol with the wordmark "MEZOKURU". 
-The symbol should represent growth, awakening, or upward spiral using minimal geometric shapes. 
-Modern, clean design with dark slate (#2c3e50) and gold (#ffd166) colors. 
-Professional tech company aesthetic. Monospace or technical font style. 
+Logo design: Letters "MK" where the letter K morphs into a spiral.
+
+- M: solid, bold, dark slate (#2c3e50)
+- K: the vertical line is solid dark slate, but the two diagonal lines curve into a golden spiral (#ffd166)
+- The spiral wraps around the MK letters
+- Minimal, geometric, clean design
+- Flat vector style, white background
+- The K should look like it's "unwinding" into the spiral
+
+Think: typography meets organic growth, sterile meets dynamic.
+```
+
+### Option 1B: M with Spiral in Box (Variation)
+```
+Minimalist square logo with letter "M" and spiral element.
+The "M" forms the main structure, with a golden spiral (#ffd166) integrated into the center.
+Square border in dark slate (#2c3e50).
+Ultra-minimal, geometric, sterile design.
+Flat vector style, white background.
+Think: brutalist design meets modern tech.
+```
+
+### Option 1C: M with Spiral in Box (Monochrome)
+```
+Simple square logo: bold "M" letterform with subtle spiral curve inside.
+Monochrome design in dark slate (#2c3e50).
+The spiral is just a thin line suggesting upward movement.
+Contained in a square border.
+Minimal, sterile, honest design.
+Flat vector, white background.
+No decoration, pure function.
+```
+
+### Option 2: M + Spiral Wordmark
+```
+Logo design: "MEZOKURU" wordmark with the "M" containing a subtle spiral element.
+The spiral is integrated into the M's structure - minimal, almost hidden.
+Dark slate (#2c3e50) text with gold (#ffd166) spiral accent.
+Clean, technical, sterile aesthetic.
+Monospace or geometric sans-serif font.
 Flat design, vector style, white background.
 ```
 
-### Option 3: Monogram Badge
+### Option 3: Square Badge with M
 ```
-Create a circular badge logo with "MZ" monogram for MEZOKURU web development. 
-Minimalist design with dark slate background (#2c3e50) and gold accent (#ffd166). 
-Include subtle spiral or growth element. Clean, modern, professional. 
-Can be used as favicon and social media icon. 
+Square badge logo with "M" and spiral for MEZOKURU.
+Dark slate (#2c3e50) square background, white "M", gold (#ffd166) spiral accent.
+Minimal, geometric, sterile design.
+Perfect for favicon and social media.
 Flat design, vector style.
+Size: works at 16x16px and scales up.
 ```
 
 ### Option 4: Code-Inspired Wordmark

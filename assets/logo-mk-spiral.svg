@@ -1,0 +1,22 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- M letter -->
+  <path d="M 40 140 L 40 60 L 70 100 L 100 60 L 100 140" 
+        fill="none" stroke="#2c3e50" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- K letter that transforms into spiral -->
+  <!-- Vertical line of K -->
+  <path d="M 120 140 L 120 60" 
+        fill="none" stroke="#2c3e50" stroke-width="10" stroke-linecap="round"/>
+  
+  <!-- Upper diagonal of K starting to curve -->
+  <path d="M 120 90 Q 140 70 155 75" 
+        fill="none" stroke="#ffd166" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Lower diagonal of K curving into spiral -->
+  <path d="M 120 90 Q 140 110 155 125 Q 165 140 160 155 Q 150 165 135 160 Q 120 150 120 135" 
+        fill="none" stroke="#ffd166" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Spiral continuation wrapping around -->
+  <path d="M 120 135 Q 115 120 105 115 Q 90 110 75 115 Q 60 125 60 140 Q 65 160 85 165 Q 110 170 130 160 Q 150 145 155 125" 
+        fill="none" stroke="#ffd166" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+</svg>
