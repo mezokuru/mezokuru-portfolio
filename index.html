@@ -4,13 +4,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Romano Canzuis — Fullstack Developer</title>
+  <title>Mezokuru — Web Development That Works</title>
   <meta name="description"
-    content="Romano Canzuis — fullstack developer. Modern web apps, performant frontends, reliable backends. See projects, case studies and contact." />
+    content="Mezokuru — Clean code. Real growth. Building fast, functional websites for businesses that want results, not bloat." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     :root {
       --font-mono: 'Fira Code', monospace;
@@ -33,11 +35,10 @@
   <div class="container">
     <header>
       <div class="logo">
-        <div class="logo-badge">RM</div>
+        <div class="logo-badge">MZ</div>
         <div>
-          <div style="font-weight:800">Romano Muller</div>
-          <div style="font-size:12px;color:var(--muted)">Full Stack Developer — Web Apps · Healthcare Tech · Business
-            Solutions</div>
+          <div style="font-weight:800">Mezokuru</div>
+          <div style="font-size:12px;color:var(--muted)">Clean code. Real growth.</div>
         </div>
       </div>
 
@@ -53,10 +54,9 @@
     <main>
       <section class="hero">
         <div class="card">
-          <div class="kicker">Romano Muller — Web Developer</div>
-          <h1 class="headline">I build websites that work.</h1>
-          <p class="sub">Need a business website? Wedding portal? Healthcare app? I'll build it with whatever tech makes
-            sense — HTML/CSS/JS for simple sites, React when you need something complex.</p>
+          <div class="kicker">Mezokuru — Web Development</div>
+          <h1 class="headline">Websites that work. No bloat.</h1>
+          <p class="sub">Business site? Custom app? I build with whatever makes sense — vanilla HTML/CSS/JS for speed, React when complexity demands it. Simple, fast, functional.</p>
 
           <div class="cta-row">
             <button class="btn btn-primary" id="hireBtn">Let's work together</button>
@@ -79,7 +79,7 @@
               <div style="font-weight:800">Availability</div>
               <div style="color:var(--muted);font-size:13px; margin-top: 4px;">Turning coffee into code since 2024</div>
               <div style="color:var(--muted);font-size:13px; margin-top: 4px;">Open to interesting projects</div>
-              <div style="margin-top: 8px; color: var(--brand); font-weight: 500;">rcmuller25@gmail.com</div>
+              <div style="margin-top: 8px; color: var(--brand); font-weight: 500;">mezokuru@gmail.com</div>
             </div>
           </div>
 
@@ -87,14 +87,18 @@
 
           <div class="card small">
             <div style="font-weight:700;margin-bottom:12px">Get in Touch</div>
-            <form id="contactForm" style="display:grid;gap:8px">
-              <input type="text" placeholder="Your name"
+            <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:grid;gap:8px">
+              <input type="hidden" name="form-name" value="contact">
+              <p style="display:none;">
+                <label>Don't fill this out: <input name="bot-field" /></label>
+              </p>
+              <input type="text" name="name" placeholder="Your name"
                 style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;color:#fff;width:100%;font-size:14px"
                 required>
-              <input type="email" placeholder="Your email"
+              <input type="email" name="email" placeholder="Your email"
                 style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;color:#fff;width:100%;font-size:14px"
                 required>
-              <textarea placeholder="How can I help?"
+              <textarea name="message" placeholder="How can I help?"
                 style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;color:#fff;width:100%;min-height:80px;font-size:14px"
                 required></textarea>
               <button type="submit" class="btn btn-primary" style="width:100%;margin-top:4px">Send Message</button>
@@ -184,7 +188,7 @@
         
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px">
           <article class="project">
-            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #d4af37, #b8941f);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px">🍽️</div>
+            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #d4af37, #b8941f);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px;color:#fff"><i class="fa-solid fa-utensils"></i></div>
             <div style="font-weight:600;margin:12px 0 6px">Restaurant/Cafe</div>
             <div style="color:var(--muted);font-size:13px;margin-bottom:12px">Menu, hours, location, reservation form</div>
             <div class="tags" style="margin-bottom:12px"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
@@ -192,7 +196,7 @@
           </article>
 
           <article class="project">
-            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #ff4757, #2ed573);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px">💪</div>
+            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #ff4757, #2ed573);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px;color:#fff"><i class="fa-solid fa-dumbbell"></i></div>
             <div style="font-weight:600;margin:12px 0 6px">Fitness/Gym</div>
             <div style="color:var(--muted);font-size:13px;margin-bottom:12px">Classes, membership plans, trainers</div>
             <div class="tags" style="margin-bottom:12px"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
@@ -200,7 +204,7 @@
           </article>
 
           <article class="project">
-            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #e91e63, #ffc107);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px">💇</div>
+            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #e91e63, #ffc107);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px;color:#fff"><i class="fa-solid fa-scissors"></i></div>
             <div style="font-weight:600;margin:12px 0 6px">Salon/Barbershop</div>
             <div style="color:var(--muted);font-size:13px;margin-bottom:12px">Services, pricing, team, booking form</div>
             <div class="tags" style="margin-bottom:12px"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
@@ -208,7 +212,7 @@
           </article>
 
           <article class="project">
-            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #2c3e50, #3498db);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px">🏠</div>
+            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #2c3e50, #3498db);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px;color:#fff"><i class="fa-solid fa-house"></i></div>
             <div style="font-weight:600;margin:12px 0 6px">Real Estate Agent</div>
             <div style="color:var(--muted);font-size:13px;margin-bottom:12px">Property listings, agent bio, contact</div>
             <div class="tags" style="margin-bottom:12px"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
@@ -216,7 +220,7 @@
           </article>
 
           <article class="project">
-            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #667eea, #764ba2);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px">📷</div>
+            <div style="height:140px;border-radius:8px;background:linear-gradient(135deg, #667eea, #764ba2);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px;color:#fff"><i class="fa-solid fa-camera"></i></div>
             <div style="font-weight:600;margin:12px 0 6px">Photography Portfolio</div>
             <div style="color:var(--muted);font-size:13px;margin-bottom:12px">Gallery, about, services, contact</div>
             <div class="tags" style="margin-bottom:12px"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
@@ -230,153 +234,6 @@
         </div>
       </section>
 
-      <section id="case-studies" style="margin-top:40px"></section>
-        <h2>Case Studies</h2>
-        <p style="color:var(--muted);margin-top:8px;text-align:center;margin-bottom:24px">WordPress to vanilla web - how I modernized client sites</p>
-
-        <div style="display:grid;gap:20px;margin-top:24px">
-          <!-- Case Study 1: Ciolli -->
-          <div class="case-study-card card">
-            <div class="case-study-header" style="cursor:pointer;display:flex;justify-content:space-between;align-items:start;gap:16px" onclick="toggleCase(this)">
-              <div style="flex:1">
-                <h3 style="margin:0 0 8px 0;font-size:1.3em">Ciolli Ready Mix Concrete</h3>
-                <p style="color:var(--muted);margin:0;font-size:0.95em">From bloated WordPress to lightning-fast static site</p>
-              </div>
-              <div class="case-toggle" style="font-size:24px;color:var(--brand);transition:transform 0.3s ease">+</div>
-            </div>
-            <div class="case-study-content" style="display:none;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06)">
-              <!-- Before/After Comparison -->
-              <div style="margin-bottom:32px">
-                <h4 style="margin:0 0 16px 0;text-align:center">Before & After</h4>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-                  <div>
-                    <div style="color:var(--muted);font-size:0.9em;margin-bottom:8px;text-align:center">Before (WordPress)</div>
-                    <img src="assets/Ciolli Before.jpeg" alt="Ciolli Before" style="width:100%;border-radius:8px;border:1px solid rgba(255,255,255,0.1)">
-                  </div>
-                  <div>
-                    <div style="color:var(--brand);font-size:0.9em;margin-bottom:8px;text-align:center">After (Vanilla)</div>
-                    <img src="assets/Ciolli After.jpeg" alt="Ciolli After" style="width:100%;border-radius:8px;border:1px solid rgba(255,255,255,0.1)">
-                  </div>
-                </div>
-              </div>
-
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px">
-                <div>
-                  <h4 style="margin:0 0 12px 0;color:var(--brand)">The Problem</h4>
-                  <ul style="color:var(--muted);margin:0;padding-left:20px">
-                    <li>Slow loading times (5+ seconds)</li>
-                    <li>Outdated WordPress theme</li>
-                    <li>Security vulnerabilities</li>
-                    <li>High hosting costs</li>
-                    <li>Poor mobile experience</li>
-                    <li>Cluttered, confusing layout</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 style="margin:0 0 12px 0;color:var(--brand)">The Solution</h4>
-                  <ul style="color:var(--muted);margin:0;padding-left:20px">
-                    <li>Clean HTML/CSS/JS rebuild</li>
-                    <li>Mobile-first responsive design</li>
-                    <li>Optimized images and assets</li>
-                    <li>Modern contact form</li>
-                    <li>SEO-friendly structure</li>
-                    <li>Clear visual hierarchy</li>
-                  </ul>
-                </div>
-              </div>
-              <div style="background:rgba(255,255,255,0.02);padding:20px;border-radius:12px;margin-bottom:20px">
-                <h4 style="margin:0 0 16px 0">Results</h4>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px">
-                  <div style="text-align:center">
-                    <div style="font-size:2em;font-weight:700;color:var(--brand)">90%+</div>
-                    <div style="color:var(--muted);font-size:0.9em">Faster load time</div>
-                  </div>
-                  <div style="text-align:center">
-                    <div style="font-size:2em;font-weight:700;color:var(--brand)">Zero</div>
-                    <div style="color:var(--muted);font-size:0.9em">Plugin dependencies</div>
-                  </div>
-                  <div style="text-align:center">
-                    <div style="font-size:2em;font-weight:700;color:var(--brand)">100%</div>
-                    <div style="color:var(--muted);font-size:0.9em">Mobile optimized</div>
-                  </div>
-                </div>
-              </div>
-              <div class="tags">
-                <span class="tag">HTML5</span>
-                <span class="tag">CSS3</span>
-                <span class="tag">Vanilla JS</span>
-                <span class="tag">Performance</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Case Study 2: Lenvalco -->
-          <div class="case-study-card card">
-            <div class="case-study-header" style="cursor:pointer;display:flex;justify-content:space-between;align-items:start;gap:16px" onclick="toggleCase(this)">
-              <div style="flex:1">
-                <h3 style="margin:0 0 8px 0;font-size:1.3em">Lenvalco Ready Mix Concrete</h3>
-                <p style="color:var(--muted);margin:0;font-size:0.95em">Complete rebuild after WordPress site failure</p>
-              </div>
-              <div class="case-toggle" style="font-size:24px;color:var(--brand);transition:transform 0.3s ease">+</div>
-            </div>
-            <div class="case-study-content" style="display:none;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06)">
-              <!-- After Only -->
-              <div style="margin-bottom:32px">
-                <h4 style="margin:0 0 16px 0;text-align:center">The New Site</h4>
-                <div style="max-width:600px;margin:0 auto">
-                  <div style="color:var(--brand);font-size:0.9em;margin-bottom:8px;text-align:center">Built from scratch (WordPress site was completely broken)</div>
-                  <img src="assets/Lenvalco After.jpeg" alt="Lenvalco After" style="width:100%;border-radius:8px;border:1px solid rgba(255,255,255,0.1)">
-                </div>
-              </div>
-
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px">
-                <div>
-                  <h4 style="margin:0 0 12px 0;color:var(--brand)">The Problem</h4>
-                  <ul style="color:var(--muted);margin:0;padding-left:20px">
-                    <li>WordPress site completely broken</li>
-                    <li>Site wouldn't even load</li>
-                    <li>Lost customer trust</li>
-                    <li>No online presence</li>
-                    <li>Urgent need for replacement</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 style="margin:0 0 12px 0;color:var(--brand)">The Solution</h4>
-                  <ul style="color:var(--muted);margin:0;padding-left:20px">
-                    <li>Built from scratch with vanilla code</li>
-                    <li>Modern orange/navy color scheme</li>
-                    <li>Clear service presentation</li>
-                    <li>Trust-building elements</li>
-                    <li>Fast, reliable hosting</li>
-                  </ul>
-                </div>
-              </div>
-              <div style="background:rgba(255,255,255,0.02);padding:20px;border-radius:12px;margin-bottom:20px">
-                <h4 style="margin:0 0 16px 0">Results</h4>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px">
-                  <div style="text-align:center">
-                    <div style="font-size:2em;font-weight:700;color:var(--brand)">24/7</div>
-                    <div style="color:var(--muted);font-size:0.9em">Reliable uptime</div>
-                  </div>
-                  <div style="text-align:center">
-                    <div style="font-size:2em;font-weight:700;color:var(--brand)">Fast</div>
-                    <div style="color:var(--muted);font-size:0.9em">Load times</div>
-                  </div>
-                  <div style="text-align:center">
-                    <div style="font-size:2em;font-weight:700;color:var(--brand)">Modern</div>
-                    <div style="color:var(--muted);font-size:0.9em">Professional look</div>
-                  </div>
-                </div>
-              </div>
-              <div class="tags">
-                <span class="tag">HTML5</span>
-                <span class="tag">CSS3</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">Rescue Project</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       <section id="testimonials" style="margin-top:40px">
@@ -448,9 +305,9 @@
             <h3 style="margin:0 0 12px 0;font-size:1.3em">Send an Email</h3>
             <p style="color:var(--muted);margin:0 0 20px 0;font-size:0.95em">Perfect for detailed project discussions or
               collaboration opportunities</p>
-            <a href="mailto:rcmuller25@gmail.com" class="contact-btn"
+            <a href="mailto:mezokuru@gmail.com" class="contact-btn"
               style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--brand);font-weight:600;transition:all 0.3s ease">
-              <span>rcmuller25@gmail.com</span>
+              <span>mezokuru@gmail.com</span>
               <span>→</span>
             </a>
           </div>
@@ -465,11 +322,9 @@
             <h3 style="margin:0 0 12px 0;font-size:1.3em">Chat or Call</h3>
             <p style="color:var(--muted);margin:0 0 20px 0;font-size:0.95em">Let's have a quick chat or schedule a call
               to discuss your project</p>
-            <a href="https://wa.me/27656667826" target="_blank" class="contact-btn"
-              style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#25D366;font-weight:600;transition:all 0.3s ease">
-              <span>+27 65 666 7826</span>
-              <span>→</span>
-            </a>
+            <div style="color:var(--muted);font-weight:600">
+              <span>Coming Soon</span>
+            </div>
           </div>
 
           <!-- Socials Card -->
@@ -482,19 +337,8 @@
             <h3 style="margin:0 0 12px 0;font-size:1.3em">Find Me Online</h3>
             <p style="color:var(--muted);margin:0 0 20px 0;font-size:0.95em">Connect with me on various platforms to see
               my work and updates</p>
-            <div style="display:flex;gap:16px;flex-wrap:wrap">
-              <a href="https://github.com/rcmuller25" target="_blank" class="social-btn"
-                style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all 0.3s ease">
-                <span style="font-size:20px">💻</span>
-              </a>
-              <a href="#" target="_blank" class="social-btn"
-                style="width:40px;height:40px;border-radius:12px;background:rgba(10,102,194,0.1);display:flex;align-items:center;justify-content:center;color:#0A66C2;text-decoration:none;transition:all 0.3s ease">
-                <span style="font-size:20px">👔</span>
-              </a>
-              <a href="#" target="_blank" class="social-btn"
-                style="width:40px;height:40px;border-radius:12px;background:rgba(29,161,242,0.1);display:flex;align-items:center;justify-content:center;color:#1DA1F2;text-decoration:none;transition:all 0.3s ease">
-                <span style="font-size:20px">🐦</span>
-              </a>
+            <div style="color:var(--muted);font-weight:600">
+              <span>Coming Soon</span>
             </div>
           </div>
         </div>
@@ -515,6 +359,17 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

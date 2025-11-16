@@ -1,0 +1,86 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets"
+public_folder: "/assets"
+
+collections:
+  - name: "clients"
+    label: "Clients"
+    folder: "content/clients"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "business"
+    fields:
+      - {label: "Business Name", name: "business", widget: "string"}
+      - {label: "Contact Person", name: "contact", widget: "string"}
+      - {label: "Email", name: "email", widget: "string"}
+      - {label: "Phone", name: "phone", widget: "string"}
+      - {label: "Address", name: "address", widget: "text", required: false}
+      - {label: "Notes", name: "notes", widget: "text", required: false}
+      - {label: "Active", name: "active", widget: "boolean", default: true}
+
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Project Name", name: "title", widget: "string"}
+      - {label: "Client", name: "client", widget: "relation", collection: "clients", search_fields: ["business"], value_field: "business", display_fields: ["business"]}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list", default: ["HTML", "CSS", "JS"]}
+      - {label: "Project Type", name: "type", widget: "select", options: ["featured", "client", "personal"], default: "client"}
+      - {label: "Status", name: "status", widget: "select", options: ["planning", "development", "honey-period", "retainer", "completed"], default: "development"}
+      - {label: "Start Date", name: "start_date", widget: "datetime"}
+      - {label: "Support Period (months)", name: "support_months", widget: "number", default: 6}
+      - {label: "GitHub URL", name: "github", widget: "string", required: false}
+      - {label: "Live URL", name: "live_url", widget: "string", required: false}
+      - {label: "Order", name: "order", widget: "number", default: 0}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+
+  - name: "invoices"
+    label: "Invoices"
+    folder: "content/invoices"
+    create: true
+    slug: "{{invoice_number}}"
+    identifier_field: "invoice_number"
+    fields:
+      - {label: "Invoice Number", name: "invoice_number", widget: "string"}
+      - {label: "Client", name: "client", widget: "relation", collection: "clients", search_fields: ["business"], value_field: "business", display_fields: ["business"]}
+      - {label: "Amount (R)", name: "amount", widget: "number", value_type: "float"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Due Date", name: "due_date", widget: "datetime"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Status", name: "status", widget: "select", options: ["draft", "sent", "paid", "overdue"], default: "draft"}
+      - {label: "Notes", name: "notes", widget: "text", required: false}
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Client Name", name: "name", widget: "string"}
+      - {label: "Company", name: "company", widget: "string"}
+      - {label: "Testimonial", name: "testimonial", widget: "text"}
+      - {label: "Rating", name: "rating", widget: "number", min: 1, max: 5, default: 5}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Published", name: "published", widget: "boolean", default: false}
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "content/settings/general.json"
+        fields:
+          - {label: "Site Title", name: "title", widget: "string"}
+          - {label: "Tagline", name: "tagline", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string", required: false}
+          - {label: "WhatsApp", name: "whatsapp", widget: "string", required: false}
+          - {label: "GitHub", name: "github", widget: "string", required: false}
+          - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}

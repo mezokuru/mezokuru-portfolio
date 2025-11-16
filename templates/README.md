@@ -67,14 +67,13 @@ MIT License - Free to use for personal and commercial projects.
 
 If you need customization, want to add features, or need help deploying:
 
-**Contact Romano Muller**
-- Portfolio: [rcmuller25.github.io](https://rcmuller25.github.io)
-- Email: rcmuller25@gmail.com
-- WhatsApp: +27 65 666 7826
+**Contact Mezokuru**
+- Website: [mezokuru.xyz](https://mezokuru.xyz)
+- Email: mezokuru@gmail.com
 
 ## Credits
 
-Created by Romano Muller - Web Developer  
+Created by Mezokuru - Web Development  
 Free templates for the dev community
 
 ---

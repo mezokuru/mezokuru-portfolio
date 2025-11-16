@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mezokuru - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #2c3e50;
+        }
+        
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 20px;
+        }
+        
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ffd166;
+        }
+        
+        .tagline {
+            font-size: 0.8em;
+            color: #bbb;
+            margin-bottom: 30px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 209, 102, 0.2);
+            color: #ffd166;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.8em;
+            color: #2c3e50;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #ffd166;
+            color: #2c3e50;
+        }
+        
+        .btn-primary:hover {
+            background: #ffb800;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffd166;
+        }
+        
+        .card-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #2c3e50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        .status-draft { background: #95a5a6; color: white; }
+        .status-sent { background: #3498db; color: white; }
+        .status-paid { background: #27ae60; color: white; }
+        .status-overdue { background: #e74c3c; color: white; }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffd166;
+        }
+        
+        .close-modal {
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">MEZOKURU</div>
+        <div class="tagline">Clean code. Real growth.</div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="showSection('dashboard')">
+                <i class="fas fa-home"></i> Dashboard
+            </li>
+            <li class="nav-item" onclick="showSection('invoices')">
+                <i class="fas fa-file-invoice"></i> Invoices
+            </li>
+            <li class="nav-item" onclick="showSection('clients')">
+                <i class="fas fa-users"></i> Clients
+            </li>
+            <li class="nav-item" onclick="showSection('projects')">
+                <i class="fas fa-project-diagram"></i> Projects
+            </li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section active">
+            <div class="header">
+                <h1>Dashboard</h1>
+                <button class="btn btn-primary" onclick="openModal('newInvoice')">
+                    <i class="fas fa-plus"></i> New Invoice
+                </button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: #3498db;">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="stat-value">R 45,250</div>
+                    <div class="stat-label">Total Revenue (2024)</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: #27ae60;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Paid Invoices</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: #f39c12;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Pending Invoices</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: #e74c3c;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-value">1</div>
+                    <div class="stat-label">Overdue</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Recent Invoices</h2>
+                </div>
+                <table id="recentInvoices">
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Client</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Invoices Section -->
+        <div id="invoices" class="section">
+            <div class="header">
+                <h1>Invoices</h1>
+                <button class="btn btn-primary" onclick="openModal('newInvoice')">
+                    <i class="fas fa-plus"></i> New Invoice
+                </button>
+            </div>
+            
+            <div class="card">
+                <table id="allInvoices">
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Client</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Clients Section -->
+        <div id="clients" class="section">
+            <div class="header">
+                <h1>Clients</h1>
+                <button class="btn btn-primary" onclick="openModal('newClient')">
+                    <i class="fas fa-plus"></i> New Client
+                </button>
+            </div>
+            
+            <div class="card">
+                <table id="clientsTable">
+                    <thead>
+                        <tr>
+                            <th>Business Name</th>
+                            <th>Contact Person</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Projects</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Projects Section -->
+        <div id="projects" class="section">
+            <div class="header">
+                <h1>Projects</h1>
+                <button class="btn btn-primary" onclick="openModal('newProject')">
+                    <i class="fas fa-plus"></i> New Project
+                </button>
+            </div>
+            
+            <div class="card">
+                <table id="projectsTable">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Client</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                            <th>Support Period</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Invoice Modal -->
+    <div id="newInvoiceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Invoice</h2>
+                <span class="close-modal" onclick="closeModal('newInvoice')">&times;</span>
+            </div>
+            <form id="invoiceForm">
+                <div class="form-group">
+                    <label>Client</label>
+                    <select id="invoiceClient" required>
+                        <option value="">Select Client</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Invoice Number</label>
+                    <input type="text" id="invoiceNumber" value="MZK-2024-001" required>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="invoiceDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="date" id="invoiceDueDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="invoiceDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Amount (R)</label>
+                    <input type="number" id="invoiceAmount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="invoiceStatus" required>
+                        <option value="draft">Draft</option>
+                        <option value="sent">Sent</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Invoice</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- New Client Modal -->
+    <div id="newClientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Client</h2>
+                <span class="close-modal" onclick="closeModal('newClient')">&times;</span>
+            </div>
+            <form id="clientForm">
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input type="text" id="clientBusiness" required>
+                </div>
+                <div class="form-group">
+                    <label>Contact Person</label>
+                    <input type="text" id="clientContact" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="clientEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="clientPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea id="clientAddress"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Client</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- New Project Modal -->
+    <div id="newProjectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Project</h2>
+                <span class="close-modal" onclick="closeModal('newProject')">&times;</span>
+            </div>
+            <form id="projectForm">
+                <div class="form-group">
+                    <label>Project Name</label>
+                    <input type="text" id="projectName" required>
+                </div>
+                <div class="form-group">
+                    <label>Client</label>
+                    <select id="projectClient" required>
+                        <option value="">Select Client</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" id="projectStart" required>
+                </div>
+                <div class="form-group">
+                    <label>Support Period (months)</label>
+                    <input type="number" id="projectSupport" value="6" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="projectStatus" required>
+                        <option value="planning">Planning</option>
+                        <option value="development">Development</option>
+                        <option value="honey-period">Honey Period</option>
+                        <option value="retainer">Retainer</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Project</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample data (in production, this would come from a database)
+        let invoices = [
+            { id: 1, number: 'MZK-2024-001', client: 'Arendse Bouers', amount: 8500, date: '2024-11-01', dueDate: '2024-11-15', status: 'paid' },
+            { id: 2, number: 'MZK-2024-002', client: 'Eagle Home Concrete', amount: 10750, date: '2024-11-10', dueDate: '2024-11-24', status: 'sent' },
+            { id: 3, number: 'MZK-2024-003', client: 'V&C Wedding', amount: 5500, date: '2024-11-15', dueDate: '2024-11-29', status: 'sent' }
+        ];
+        
+        let clients = [
+            { id: 1, business: 'Arendse Bouers', contact: 'John Arendse', email: 'john@arendsebouers.co.za', phone: '+27 82 123 4567', projects: 1 },
+            { id: 2, business: 'Eagle Home Concrete', contact: 'Mike Eagle', email: 'mike@ehconcrete.co.za', phone: '+27 83 234 5678', projects: 1 },
+            { id: 3, business: 'V&C Wedding', contact: 'Veronica Smith', email: 'veronica@email.com', phone: '+27 84 345 6789', projects: 1 }
+        ];
+        
+        let projects = [
+            { id: 1, name: 'Arendse Bouers Website', client: 'Arendse Bouers', status: 'retainer', startDate: '2024-09-01', supportMonths: 6 },
+            { id: 2, name: 'Eagle Home Website', client: 'Eagle Home Concrete', status: 'honey-period', startDate: '2024-10-15', supportMonths: 6 },
+            { id: 3, name: 'Wedding Portal', client: 'V&C Wedding', status: 'completed', startDate: '2024-08-01', supportMonths: 3 }
+        ];
+        
+        // Navigation
+        function showSection(sectionName) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(sectionName).classList.add('active');
+            event.target.closest('.nav-item').classList.add('active');
+            
+            if (sectionName === 'dashboard' || sectionName === 'invoices') {
+                renderInvoices();
+            } else if (sectionName === 'clients') {
+                renderClients();
+            } else if (sectionName === 'projects') {
+                renderProjects();
+            }
+        }
+        
+        // Modal functions
+        function openModal(modalName) {
+            document.getElementById(modalName + 'Modal').classList.add('active');
+            populateClientDropdowns();
+        }
+        
+        function closeModal(modalName) {
+            document.getElementById(modalName + 'Modal').classList.remove('active');
+        }
+        
+        // Populate client dropdowns
+        function populateClientDropdowns() {
+            const selects = [document.getElementById('invoiceClient'), document.getElementById('projectClient')];
+            selects.forEach(select => {
+                if (select) {
+                    select.innerHTML = '<option value="">Select Client</option>';
+                    clients.forEach(client => {
+                        select.innerHTML += `<option value="${client.business}">${client.business}</option>`;
+                    });
+                }
+            });
+        }
+        
+        // Render functions
+        function renderInvoices() {
+            const tbody = document.querySelector('#recentInvoices tbody') || document.querySelector('#allInvoices tbody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = invoices.map(inv => `
+                <tr>
+                    <td>${inv.number}</td>
+                    <td>${inv.client}</td>
+                    <td>R ${inv.amount.toLocaleString()}</td>
+                    <td>${inv.date}</td>
+                    ${document.getElementById('allInvoices') ? `<td>${inv.dueDate}</td>` : ''}
+                    <td><span class="status-badge status-${inv.status}">${inv.status.toUpperCase()}</span></td>
+                    <td class="action-buttons">
+                        <button class="btn btn-secondary btn-small" onclick="viewInvoice(${inv.id})">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-danger btn-small" onclick="deleteInvoice(${inv.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function renderClients() {
+            const tbody = document.querySelector('#clientsTable tbody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = clients.map(client => `
+                <tr>
+                    <td>${client.business}</td>
+                    <td>${client.contact}</td>
+                    <td>${client.email}</td>
+                    <td>${client.phone}</td>
+                    <td>${client.projects}</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-secondary btn-small" onclick="editClient(${client.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger btn-small" onclick="deleteClient(${client.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function renderProjects() {
+            const tbody = document.querySelector('#projectsTable tbody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = projects.map(proj => `
+                <tr>
+                    <td>${proj.name}</td>
+                    <td>${proj.client}</td>
+                    <td><span class="status-badge status-sent">${proj.status.toUpperCase()}</span></td>
+                    <td>${proj.startDate}</td>
+                    <td>${proj.supportMonths} months</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-secondary btn-small" onclick="editProject(${proj.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger btn-small" onclick="deleteProject(${proj.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        // Form submissions
+        document.getElementById('invoiceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newInvoice = {
+                id: invoices.length + 1,
+                number: document.getElementById('invoiceNumber').value,
+                client: document.getElementById('invoiceClient').value,
+                amount: parseFloat(document.getElementById('invoiceAmount').value),
+                date: document.getElementById('invoiceDate').value,
+                dueDate: document.getElementById('invoiceDueDate').value,
+                status: document.getElementById('invoiceStatus').value
+            };
+            invoices.push(newInvoice);
+            closeModal('newInvoice');
+            renderInvoices();
+            alert('Invoice created successfully!');
+        });
+        
+        document.getElementById('clientForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newClient = {
+                id: clients.length + 1,
+                business: document.getElementById('clientBusiness').value,
+                contact: document.getElementById('clientContact').value,
+                email: document.getElementById('clientEmail').value,
+                phone: document.getElementById('clientPhone').value,
+                projects: 0
+            };
+            clients.push(newClient);
+            closeModal('newClient');
+            renderClients();
+            alert('Client added successfully!');
+        });
+        
+        document.getElementById('projectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newProject = {
+                id: projects.length + 1,
+                name: document.getElementById('projectName').value,
+                client: document.getElementById('projectClient').value,
+                status: document.getElementById('projectStatus').value,
+                startDate: document.getElementById('projectStart').value,
+                supportMonths: parseInt(document.getElementById('projectSupport').value)
+            };
+            projects.push(newProject);
+            closeModal('newProject');
+            renderProjects();
+            alert('Project created successfully!');
+        });
+        
+        // Action functions
+        function viewInvoice(id) {
+            alert('Opening invoice ' + id + ' (would open invoice template with data)');
+        }
+        
+        function deleteInvoice(id) {
+            if (confirm('Delete this invoice?')) {
+                invoices = invoices.filter(inv => inv.id !== id);
+                renderInvoices();
+            }
+        }
+        
+        function editClient(id) {
+            alert('Edit client ' + id + ' (would open edit modal)');
+        }
+        
+        function deleteClient(id) {
+            if (confirm('Delete this client?')) {
+                clients = clients.filter(c => c.id !== id);
+                renderClients();
+            }
+        }
+        
+        function editProject(id) {
+            alert('Edit project ' + id + ' (would open edit modal)');
+        }
+        
+        function deleteProject(id) {
+            if (confirm('Delete this project?')) {
+                projects = projects.filter(p => p.id !== id);
+                renderProjects();
+            }
+        }
+        
+        // Initialize
+        renderInvoices();
+        populateClientDropdowns();
+        
+        // Set today's date as default
+        document.getElementById('invoiceDate').valueAsDate = new Date();
+        document.getElementById('projectStart').valueAsDate = new Date();
+    </script>
+</body>
+</html>

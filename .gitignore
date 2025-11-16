@@ -1,14 +1,5 @@
-# Dependency directories
 node_modules/
-
-# Environment variables
+.DS_Store
+*.log
 .env
-
-# Editor directories and files
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.env.local
