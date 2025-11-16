@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /content/
+Disallow: /.netlify/
+Disallow: /generate-invoice.html
+Disallow: /quotation-*.html
+Disallow: /mezokuru-invoice-template.html
+Disallow: /admin-panel.html
+
+Sitemap: https://mezokuru.xyz/sitemap.xml

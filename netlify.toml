@@ -1,3 +1,59 @@
 [build]
   publish = "."
   command = "echo 'No build command needed'"
+
+# Redirect rules
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/index"
+  to = "/"
+  status = 301
+
+# Force HTTPS
+[[redirects]]
+  from = "http://mezokuru.xyz/*"
+  to = "https://mezokuru.xyz/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.mezokuru.xyz/*"
+  to = "https://mezokuru.xyz/:splat"
+  status = 301
+  force = true
+
+# WWW to non-WWW
+[[redirects]]
+  from = "https://www.mezokuru.xyz/*"
+  to = "https://mezokuru.xyz/:splat"
+  status = 301
+  force = true
+
+# Pretty URLs (optional)
+[[redirects]]
+  from = "/templates"
+  to = "/templates.html"
+  status = 200
+
+[[redirects]]
+  from = "/resources"
+  to = "/resources.html"
+  status = 200
+
+# 404 page
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"

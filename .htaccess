@@ -1,0 +1,81 @@
+# Apache configuration for Mezokuru
+# Note: This is for Apache servers. Netlify uses _headers and netlify.toml instead.
+
+# Enable rewrite engine
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
+  # Force non-WWW
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+  
+  # Pretty URLs
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^templates$ templates.html [L]
+  RewriteRule ^resources$ resources.html [L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+  Header set X-Frame-Options "DENY"
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Browser Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Images
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  
+  # CSS and JavaScript
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  
+  # Fonts
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  
+  # HTML
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# Block access to sensitive files
+<FilesMatch "^(\.htaccess|\.gitignore|netlify\.toml|_headers|package\.json|README\.md|CHANGELOG\.md|\.env)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Block admin and private areas
+<FilesMatch "^(admin-panel\.html|generate-invoice\.html|mezokuru-invoice-template\.html|quotation-.*)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Custom 404 page
+ErrorDocument 404 /404.html
+
+# Disable directory browsing
+Options -Indexes
+
+# Protect against clickjacking
+<IfModule mod_headers.c>
+  Header always append X-Frame-Options DENY
+</IfModule>
