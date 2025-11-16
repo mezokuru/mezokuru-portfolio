@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Name - Fine Dining Experience</title>
+    <style>
+        /* ===== COLOR SCHEME - CUSTOMIZE THESE ===== */
+        :root {
+            --primary: #d4af37;
+            --primary-dark: #b8941f;
+            --bg-dark: #1a1a1a;
+            --bg-light: #2a2a2a;
+            --text-light: #ffffff;
+            --text-muted: #cccccc;
+            --accent: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item .price {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        /* Hours Section */
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .hours-item {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .hours-item strong {
+            color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--primary);
+            color: var(--text-light);
+            border-radius: 5px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-light);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#hours">Hours</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Restaurant Name</h1>
+            <p>Experience Fine Dining at Its Best</p>
+            <a href="#menu" class="btn">View Menu</a>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>Grilled Salmon</h3>
+                <p>Fresh Atlantic salmon with seasonal vegetables and lemon butter sauce</p>
+                <p class="price">R185</p>
+            </div>
+            <div class="menu-item">
+                <h3>Ribeye Steak</h3>
+                <p>12oz premium ribeye with garlic mashed potatoes and asparagus</p>
+                <p class="price">R245</p>
+            </div>
+            <div class="menu-item">
+                <h3>Pasta Carbonara</h3>
+                <p>Homemade pasta with pancetta, egg, and parmesan cheese</p>
+                <p class="price">R145</p>
+            </div>
+            <div class="menu-item">
+                <h3>Caesar Salad</h3>
+                <p>Crisp romaine lettuce with house-made dressing and croutons</p>
+                <p class="price">R95</p>
+            </div>
+            <div class="menu-item">
+                <h3>Chocolate Lava Cake</h3>
+                <p>Warm chocolate cake with vanilla ice cream</p>
+                <p class="price">R65</p>
+            </div>
+            <div class="menu-item">
+                <h3>Tiramisu</h3>
+                <p>Classic Italian dessert with espresso and mascarpone</p>
+                <p class="price">R60</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="specials" style="background: var(--bg-light); padding: 4rem 2rem; margin: 0 -2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2>Today's Specials</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div style="background: var(--bg-dark); padding: 2rem; border-radius: 10px; border: 2px solid var(--primary);">
+                    <div style="color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">LUNCH SPECIAL</div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">2-Course Meal</h3>
+                    <p>Any starter + main course</p>
+                    <p style="font-size: 2rem; color: var(--primary); font-weight: bold; margin-top: 1rem;">R150</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Mon-Fri, 11AM-3PM</p>
+                </div>
+                <div style="background: var(--bg-dark); padding: 2rem; border-radius: 10px; border: 2px solid var(--primary);">
+                    <div style="color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">HAPPY HOUR</div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Drinks & Appetizers</h3>
+                    <p>50% off selected drinks and starters</p>
+                    <p style="font-size: 2rem; color: var(--primary); font-weight: bold; margin-top: 1rem;">50% OFF</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Daily, 4PM-6PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hours">
+        <h2>Opening Hours</h2>
+        <div class="hours-grid">
+            <div class="hours-item">
+                <strong>Monday - Thursday</strong>
+                <p>11:00 AM - 10:00 PM</p>
+            </div>
+            <div class="hours-item">
+                <strong>Friday - Saturday</strong>
+                <p>11:00 AM - 11:00 PM</p>
+            </div>
+            <div class="hours-item">
+                <strong>Sunday</strong>
+                <p>12:00 PM - 9:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Location</h3>
+                <p>123 Main Street<br>City, State 12345</p>
+                <h3 style="margin-top: 2rem;">Phone</h3>
+                <p>(555) 123-4567</p>
+                <h3 style="margin-top: 2rem;">Email</h3>
+                <p>info@restaurant.com</p>
+            </div>
+            <div class="contact-info">
+                <h3>Reservation Request</h3>
+                <form id="contactForm">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                    <textarea rows="4" placeholder="Message (Date, Time, Party Size)" required></textarea>
+                    <button type="submit">Send Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Restaurant Name. All rights reserved.</p>
+        <p>Free template by <a href="https://rcmuller25.github.io" target="_blank">Romano Muller</a> - Need customization? <a href="https://rcmuller25.github.io#contact">Contact me</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! We will contact you soon to confirm your reservation.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

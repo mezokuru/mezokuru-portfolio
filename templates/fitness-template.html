@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife Gym - Transform Your Body</title>
+    <style>
+        /* ===== COLOR SCHEME - CUSTOMIZE THESE ===== */
+        :root {
+            --primary: #ff4757;
+            --primary-dark: #e63946;
+            --secondary: #2ed573;
+            --bg-dark: #0a0e27;
+            --bg-light: #1e2749;
+            --text-light: #ffffff;
+            --text-muted: #a4b0be;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Classes Section */
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .class-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .class-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .class-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Membership Section */
+        .membership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .membership-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--primary);
+        }
+
+        .membership-card.featured {
+            border-color: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .membership-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .membership-card.featured .price {
+            color: var(--secondary);
+        }
+
+        .features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .features li:before {
+            content: "✓ ";
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Trainers Section */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .trainer-card {
+            background: var(--bg-light);
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .trainer-img {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .trainer-info {
+            padding: 1.5rem;
+        }
+
+        .trainer-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--bg-light);
+            border: 2px solid var(--primary);
+            color: var(--text-light);
+            border-radius: 10px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--text-light);
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        form button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-light);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .membership-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#classes">Classes</a></li>
+            <li><a href="#membership">Membership</a></li>
+            <li><a href="#trainers">Trainers</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Transform Your Body</h1>
+            <p>Join FitLife Gym Today</p>
+            <a href="#membership" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <section id="classes">
+        <h2>Our Classes</h2>
+        <div class="classes-grid">
+            <div class="class-card">
+                <div class="class-icon">💪</div>
+                <h3>Strength Training</h3>
+                <p>Build muscle and increase strength with our expert-led weight training sessions.</p>
+                <p><strong>Mon, Wed, Fri - 6:00 AM & 6:00 PM</strong></p>
+            </div>
+            <div class="class-card">
+                <div class="class-icon">🏃</div>
+                <h3>Cardio Blast</h3>
+                <p>High-intensity cardio workouts to burn calories and improve endurance.</p>
+                <p><strong>Tue, Thu - 7:00 AM & 7:00 PM</strong></p>
+            </div>
+            <div class="class-card">
+                <div class="class-icon">🧘</div>
+                <h3>Yoga & Flexibility</h3>
+                <p>Improve flexibility, balance, and mental clarity with guided yoga sessions.</p>
+                <p><strong>Daily - 8:00 AM & 5:00 PM</strong></p>
+            </div>
+            <div class="class-card">
+                <div class="class-icon">🥊</div>
+                <h3>Boxing</h3>
+                <p>Learn boxing techniques while getting an intense full-body workout.</p>
+                <p><strong>Mon, Wed, Fri - 7:00 PM</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="membership">
+        <h2>Membership Plans</h2>
+        <div class="membership-grid">
+            <div class="membership-card">
+                <h3>Basic</h3>
+                <div class="price">R350<span style="font-size: 1rem;">/mo</span></div>
+                <ul class="features">
+                    <li>Gym Access</li>
+                    <li>Locker Room</li>
+                    <li>Free WiFi</li>
+                </ul>
+                <a href="#contact" class="btn">Join Now</a>
+            </div>
+            <div class="membership-card featured">
+                <h3>Premium</h3>
+                <div class="price">R600<span style="font-size: 1rem;">/mo</span></div>
+                <ul class="features">
+                    <li>All Basic Features</li>
+                    <li>All Group Classes</li>
+                    <li>Personal Trainer (2x/month)</li>
+                    <li>Nutrition Consultation</li>
+                </ul>
+                <a href="#contact" class="btn btn-secondary">Join Now</a>
+            </div>
+            <div class="membership-card">
+                <h3>Elite</h3>
+                <div class="price">R950<span style="font-size: 1rem;">/mo</span></div>
+                <ul class="features">
+                    <li>All Premium Features</li>
+                    <li>Unlimited Personal Training</li>
+                    <li>Massage Therapy</li>
+                    <li>Priority Booking</li>
+                </ul>
+                <a href="#contact" class="btn">Join Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="trainers">
+        <h2>Meet Our Trainers</h2>
+        <div class="trainers-grid">
+            <div class="trainer-card">
+                <div class="trainer-img">👨‍🏫</div>
+                <div class="trainer-info">
+                    <h3>John Smith</h3>
+                    <p>Strength & Conditioning</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">10 years experience</p>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-img">👩‍🏫</div>
+                <div class="trainer-info">
+                    <h3>Sarah Johnson</h3>
+                    <p>Yoga & Wellness</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">8 years experience</p>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-img">👨‍🏫</div>
+                <div class="trainer-info">
+                    <h3>Mike Davis</h3>
+                    <p>Boxing & HIIT</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">12 years experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bmi-calculator" style="background: var(--bg-light); padding: 4rem 2rem; margin: 0 -2rem;">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <h2>BMI Calculator</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Check your Body Mass Index</p>
+            <div style="background: var(--bg-dark); padding: 2rem; border-radius: 15px; border: 2px solid var(--primary);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Weight (kg)</label>
+                        <input type="number" id="weight" placeholder="70" style="width: 100%; padding: 1rem; background: var(--bg-light); border: 2px solid var(--primary); color: var(--text-light); border-radius: 10px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Height (cm)</label>
+                        <input type="number" id="height" placeholder="170" style="width: 100%; padding: 1rem; background: var(--bg-light); border: 2px solid var(--primary); color: var(--text-light); border-radius: 10px;">
+                    </div>
+                </div>
+                <button onclick="calculateBMI()" style="width: 100%; padding: 1rem; background: var(--primary); color: var(--text-light); border: none; border-radius: 50px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 1rem;">Calculate</button>
+                <div id="bmiResult" style="text-align: center; padding: 1.5rem; background: var(--bg-light); border-radius: 10px; display: none;">
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--primary);" id="bmiValue"></div>
+                    <div style="color: var(--text-muted); margin-top: 0.5rem;" id="bmiCategory"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get Started Today</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <textarea rows="4" placeholder="Tell us about your fitness goals" required></textarea>
+            <button type="submit">Start Your Journey</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 FitLife Gym. All rights reserved.</p>
+        <p>Free template by <a href="https://rcmuller25.github.io" target="_blank">Romano Muller</a> - Need customization? <a href="https://rcmuller25.github.io#contact">Contact me</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // BMI Calculator
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100; // convert to meters
+            
+            if (!weight || !height) {
+                alert('Please enter both weight and height');
+                return;
+            }
+            
+            const bmi = (weight / (height * height)).toFixed(1);
+            let category = '';
+            
+            if (bmi < 18.5) category = 'Underweight';
+            else if (bmi < 25) category = 'Normal weight';
+            else if (bmi < 30) category = 'Overweight';
+            else category = 'Obese';
+            
+            document.getElementById('bmiValue').textContent = bmi;
+            document.getElementById('bmiCategory').textContent = category;
+            document.getElementById('bmiResult').style.display = 'block';
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! We will contact you soon to schedule your free consultation.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

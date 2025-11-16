@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe Salon - Beauty & Style</title>
+    <style>
+        /* ===== COLOR SCHEME - CUSTOMIZE THESE ===== */
+        :root {
+            --primary: #e91e63;
+            --primary-dark: #c2185b;
+            --secondary: #ffc107;
+            --bg-light: #fff5f8;
+            --bg-white: #ffffff;
+            --text-dark: #2c2c2c;
+            --text-muted: #757575;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--bg-white);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(233, 30, 99, 0.7), rgba(233, 30, 99, 0.7)), 
+                        url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--secondary);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #ffb300;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--bg-white);
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .team-img {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        .team-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--bg-light);
+            border: 2px solid var(--primary);
+            color: var(--text-dark);
+            border-radius: 10px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        form button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-white);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>LUXE SALON</h1>
+            <p>Where Beauty Meets Elegance</p>
+            <a href="#contact" class="btn">Book Appointment</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💇</div>
+                <h3>Haircut & Styling</h3>
+                <p>Expert cuts and styling for all hair types. Includes wash and blow dry.</p>
+                <div class="service-price">From R350</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Hair Coloring</h3>
+                <p>Full color, highlights, balayage, and color correction services.</p>
+                <div class="service-price">From R650</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3>Hair Treatment</h3>
+                <p>Deep conditioning, keratin treatment, and hair repair services.</p>
+                <div class="service-price">From R450</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💅</div>
+                <h3>Manicure & Pedicure</h3>
+                <p>Classic, gel, and spa manicure and pedicure services.</p>
+                <div class="service-price">From R250</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🧖</div>
+                <h3>Facial Treatment</h3>
+                <p>Customized facial treatments for all skin types.</p>
+                <div class="service-price">From R550</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💄</div>
+                <h3>Makeup Services</h3>
+                <p>Professional makeup for special occasions and events.</p>
+                <div class="service-price">From R450</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <h2>Meet Our Team</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-img">👩</div>
+                <div class="team-info">
+                    <h3>Emma Wilson</h3>
+                    <p>Master Stylist</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">15 years experience</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img">👩</div>
+                <div class="team-info">
+                    <h3>Sophia Martinez</h3>
+                    <p>Color Specialist</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">10 years experience</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img">👩</div>
+                <div class="team-info">
+                    <h3>Olivia Brown</h3>
+                    <p>Nail Technician</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">8 years experience</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img">👩</div>
+                <div class="team-info">
+                    <h3>Ava Johnson</h3>
+                    <p>Esthetician</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">12 years experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Our Work</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">📸</div>
+            <div class="gallery-item">📸</div>
+            <div class="gallery-item">📸</div>
+            <div class="gallery-item">📸</div>
+            <div class="gallery-item">📸</div>
+            <div class="gallery-item">📸</div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem; color: var(--text-muted);">
+            Replace these placeholders with your actual work photos
+        </p>
+    </section>
+
+    <section id="contact">
+        <h2>Book Your Appointment</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Visit Us</h3>
+                <p>456 Beauty Avenue<br>City, State 12345</p>
+                <h3 style="margin-top: 2rem;">Hours</h3>
+                <p>Mon-Fri: 9:00 AM - 7:00 PM<br>
+                   Sat: 9:00 AM - 6:00 PM<br>
+                   Sun: 10:00 AM - 5:00 PM</p>
+                <h3 style="margin-top: 2rem;">Contact</h3>
+                <p>Phone: (555) 987-6543<br>
+                   Email: info@luxesalon.com</p>
+            </div>
+            <div class="contact-info">
+                <h3>Request Appointment</h3>
+                <form id="contactForm">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                    <select required style="width: 100%; padding: 1rem; margin-bottom: 1rem; background: var(--bg-light); border: 2px solid var(--primary); color: var(--text-dark); border-radius: 10px;">
+                        <option value="">Select Service</option>
+                        <option value="haircut">Haircut & Styling</option>
+                        <option value="coloring">Hair Coloring</option>
+                        <option value="treatment">Hair Treatment</option>
+                        <option value="nails">Manicure & Pedicure</option>
+                        <option value="facial">Facial Treatment</option>
+                        <option value="makeup">Makeup Services</option>
+                    </select>
+                    <input type="date" required style="width: 100%; padding: 1rem; margin-bottom: 1rem; background: var(--bg-light); border: 2px solid var(--primary); color: var(--text-dark); border-radius: 10px;">
+                    <select required style="width: 100%; padding: 1rem; margin-bottom: 1rem; background: var(--bg-light); border: 2px solid var(--primary); color: var(--text-dark); border-radius: 10px;">
+                        <option value="">Select Time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                    </select>
+                    <textarea rows="2" placeholder="Special requests (optional)"></textarea>
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Luxe Salon. All rights reserved.</p>
+        <p>Free template by <a href="https://rcmuller25.github.io" target="_blank">Romano Muller</a> - Need customization? <a href="https://rcmuller25.github.io#contact">Contact me</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! We will contact you soon to confirm your appointment.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

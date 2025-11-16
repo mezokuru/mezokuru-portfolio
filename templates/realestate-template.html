@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Realty - Your Dream Home Awaits</title>
+    <style>
+        /* ===== COLOR SCHEME - CUSTOMIZE THESE ===== */
+        :root {
+            --primary: #2c3e50;
+            --primary-light: #34495e;
+            --accent: #3498db;
+            --accent-dark: #2980b9;
+            --bg-light: #ecf0f1;
+            --bg-white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --success: #27ae60;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--primary);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), 
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        /* Properties Section */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .property-card {
+            background: var(--bg-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .property-img {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .property-info {
+            padding: 1.5rem;
+        }
+
+        .property-price {
+            font-size: 2rem;
+            color: var(--success);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .property-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-details {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            color: var(--text-muted);
+        }
+
+        .property-details span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* About Agent Section */
+        .agent-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .agent-photo {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+        }
+
+        .agent-info h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-info .title {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        form input, form textarea, form select {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--bg-light);
+            border: 2px solid var(--primary);
+            color: var(--text-dark);
+            border-radius: 5px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        form button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            text-align: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .agent-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .agent-photo {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#properties">Properties</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Find Your Dream Home</h1>
+            <p>Expert Real Estate Services You Can Trust</p>
+            <a href="#properties" class="btn">View Properties</a>
+        </div>
+    </section>
+
+    <section id="properties">
+        <h2>Featured Properties</h2>
+        
+        <div style="background: var(--bg-white); padding: 2rem; border-radius: 15px; margin-bottom: 3rem; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+            <h3 style="margin: 0 0 1rem 0; text-align: center;">Find Your Perfect Home</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <select style="padding: 1rem; background: var(--bg-light); border: 2px solid var(--primary); color: var(--text-dark); border-radius: 5px;">
+                    <option value="">Property Type</option>
+                    <option value="house">House</option>
+                    <option value="condo">Condo</option>
+                    <option value="estate">Estate</option>
+                </select>
+                <select style="padding: 1rem; background: var(--bg-light); border: 2px solid var(--primary); color: var(--text-dark); border-radius: 5px;">
+                    <option value="">Bedrooms</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                    <option value="5">5+</option>
+                </select>
+                <select style="padding: 1rem; background: var(--bg-light); border: 2px solid var(--primary); color: var(--text-dark); border-radius: 5px;">
+                    <option value="">Price Range</option>
+                    <option value="1">Under R2M</option>
+                    <option value="2">R2M - R4M</option>
+                    <option value="3">R4M - R6M</option>
+                    <option value="4">R6M+</option>
+                </select>
+                <button style="padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Search</button>
+            </div>
+        </div>
+        
+        <div class="properties-grid">
+            <div class="property-card">
+                <div class="property-img">🏠</div>
+                <div class="property-info">
+                    <div class="property-price">R3,850,000</div>
+                    <h3>Modern Family Home</h3>
+                    <p>Beautiful 4-bedroom home in quiet neighborhood with updated kitchen and spacious backyard.</p>
+                    <div class="property-details">
+                        <span>🛏️ 4 Beds</span>
+                        <span>🚿 3 Baths</span>
+                        <span>📐 220 sqm</span>
+                    </div>
+                    <a href="#contact" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Schedule Viewing</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-img">🏢</div>
+                <div class="property-info">
+                    <div class="property-price">R2,750,000</div>
+                    <h3>Downtown Condo</h3>
+                    <p>Luxury 2-bedroom condo with stunning city views and modern amenities.</p>
+                    <div class="property-details">
+                        <span>🛏️ 2 Beds</span>
+                        <span>🚿 2 Baths</span>
+                        <span>📐 110 sqm</span>
+                    </div>
+                    <a href="#contact" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Schedule Viewing</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-img">🏡</div>
+                <div class="property-info">
+                    <div class="property-price">R5,750,000</div>
+                    <h3>Luxury Estate</h3>
+                    <p>Stunning 5-bedroom estate with pool, home theater, and gourmet kitchen.</p>
+                    <div class="property-details">
+                        <span>🛏️ 5 Beds</span>
+                        <span>🚿 4 Baths</span>
+                        <span>📐 390 sqm</span>
+                    </div>
+                    <a href="#contact" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Schedule Viewing</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>Meet Your Agent</h2>
+        <div class="agent-container">
+            <div class="agent-photo">👤</div>
+            <div class="agent-info">
+                <h3>John Anderson</h3>
+                <div class="title">Licensed Real Estate Agent</div>
+                <p>With over 15 years of experience in the real estate market, I'm dedicated to helping you find your perfect home or sell your property for the best price. My commitment to exceptional service and deep market knowledge ensures a smooth and successful transaction.</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">250+</div>
+                        <div class="stat-label">Homes Sold</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">R850M+</div>
+                        <div class="stat-label">Sales Volume</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>My Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Buyer Representation</h3>
+                <p>Expert guidance through the home buying process, from search to closing.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3>Seller Representation</h3>
+                <p>Strategic marketing and pricing to sell your home quickly and for top dollar.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Market Analysis</h3>
+                <p>Comprehensive market reports to help you make informed decisions.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔑</div>
+                <h3>Investment Properties</h3>
+                <p>Identify and acquire profitable investment opportunities.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <select required>
+                <option value="">I'm interested in...</option>
+                <option value="buying">Buying a Home</option>
+                <option value="selling">Selling a Home</option>
+                <option value="investing">Investment Properties</option>
+                <option value="consultation">Free Consultation</option>
+            </select>
+            <textarea rows="4" placeholder="Tell me about your needs" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Elite Realty. All rights reserved.</p>
+        <p>Free template by <a href="https://rcmuller25.github.io" target="_blank">Romano Muller</a> - Need customization? <a href="https://rcmuller25.github.io#contact">Contact me</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! I will contact you within 24 hours to discuss your real estate needs.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
