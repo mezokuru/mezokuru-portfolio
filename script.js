@@ -1,16 +1,19 @@
 // Progressive: simple client-side filtering and case-study rendering
-document.getElementById('filter').addEventListener('change', function() {
-  const value = this.value;
-  const projects = document.querySelectorAll('.project-card');
-  
-  projects.forEach(project => {
-    if (value === 'all' || project.dataset.tags.includes(value)) {
-      project.style.display = 'block';
-    } else {
-      project.style.display = 'none';
-    }
+const filterElement = document.getElementById('filter');
+if (filterElement) {
+  filterElement.addEventListener('change', function() {
+    const value = this.value;
+    const projects = document.querySelectorAll('.project-card');
+    
+    projects.forEach(project => {
+      if (value === 'all' || project.dataset.tags.includes(value)) {
+        project.style.display = 'block';
+      } else {
+        project.style.display = 'none';
+      }
+    });
   });
-});
+}
 
 function openCase(e, id) {
   e.preventDefault();
